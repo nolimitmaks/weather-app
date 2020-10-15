@@ -10,10 +10,7 @@ export const FETCH_WEATHER = 'FETCH_WEATHER'
 export function fetchWeather(city) {
     const url = `${WEATHER_URL}${city},us&appid=${API_WEATHER_KEY}`
     const request = axios.get(url)
-
-    request
-        .then(e => console.log(e.data))
-
+    
     return {
         type: FETCH_WEATHER,
         payload: request
