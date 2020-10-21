@@ -15,16 +15,16 @@ export default class LineChart extends React.Component {
     }
 
     createCharts() {
-        const temp = this.props.temp
+        const data = this.props.data
         let labels = []
 
-        for (let index = 0; index < temp.length; index++) {
+        for (let index = 0; index < data.length; index++) {
             labels.push(index)
             
         }
 
 
-        const ctx = document.getElementById('myChart')
+        const ctx = document.getElementById(this.props.chart_id)
 
 const myChart = new Chart(ctx, {
     type: 'line',
@@ -33,7 +33,7 @@ const myChart = new Chart(ctx, {
         datasets: [{
             label: '# of Votes',
             // data: [12, 19, 3, 5, 2, 3],
-            data: temp,
+            data: data,
             
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -75,7 +75,7 @@ const myChart = new Chart(ctx, {
         
 
         return (
-            <canvas id="myChart" width="400" height="190"></canvas>
+            <canvas id={this.props.chart_id} width="400" height="190"></canvas>
         )
     }
 }
