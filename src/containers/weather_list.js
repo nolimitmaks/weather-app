@@ -16,33 +16,62 @@ class WeatherList extends React.Component {
 
     renderWeather(cityData) {
         const name = cityData.city.name
+        const city_data_list = cityData.list
 
-        console.log(cityData.city.name)
-
-        const temp = cityData.list.map(
+        const temp = city_data_list.map(
             e => e.main.temp
         )
+
+        const humidity = city_data_list.map(
+            e => e.main.humidity
+        )
+
+        const pressure = city_data_list.map(
+            e => e.main.pressure
+        )
+
+
+        const data_charts = [
+            {
+                data: temp,
+                chart_id: 'temp'
+            },
+            {
+                data: humidity,
+                chart_id: 'humidity'
+            },
+            {
+                data: pressure,
+                chart_id: 'pressure'
+            },
+        ]
+        
         return (
             <tr key={name}>
                 <td>{name}</td>
 
-                <td>
-                    <LineChart temp={temp} />
-                </td>
+                {
+                    data_charts.map(
+                        e => (
+                            <td key={e.chart_id}>
+                                <LineChart chart_id={e.chart_id} data={e.data} />
+                            </td>
+                        )
+                    )
+                }
+                
             </tr>
-            
         )
     }
 
     render() {
-        console.log(this.props.weather);
         return (
             <div>
                 <table className='table table-hover'>
                     <thead>
                         <tr>
                             <th>City</th>
-                            <th>Temperature</th>
+                            <th>Temperature </th>
                             <th>Pressure</th>
                             <th>Humidity</th>
                         </tr>
